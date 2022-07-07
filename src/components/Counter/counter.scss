@@ -1,0 +1,28 @@
+.counter{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 50px;
+    width: 146px;
+    border: 2px solid #eeeeee;
+    background-color: #fafafa;
+    &>span{
+        display: flex;
+        align-items: center;
+        height: 100%;
+        cursor: pointer;
+        padding: 0 15px;
+    }
+    &__count{
+        border: none;
+        background-color: #fafafa;
+        width: 40px;
+        height: 100%;
+        text-align: center;
+        margin: 0 auto;
+        font-size: 20px;
+        &:focus{
+             outline: none; 
+        } 
+    }
+}

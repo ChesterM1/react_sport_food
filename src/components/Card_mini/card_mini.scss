@@ -1,0 +1,43 @@
+.card-mini{
+    position: fixed;
+    right: 10px;
+    top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 150px;
+    height: 50px;
+    background-color: rgba(153, 183, 101, 0.894);
+    border-radius: 30px;
+    padding: 0 20px;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    z-index: 2;
+    &__total{
+        display: flex;
+        justify-content: space-between;
+        width: 40px;
+        &>span{
+            color: rgb(255, 253, 253);
+        }
+        &>img{
+            display: block;
+            width: 15px;
+            height: 15px;
+            object-fit: contain;
+            align-self: center;
+        }
+    }
+    &>span{
+        padding: 0 5px; 
+        color: rgb(255, 253, 253);
+
+    }
+   
+    &__counter{
+        width: 40px;
+        color: rgb(255, 253, 253);
+
+    }
+}

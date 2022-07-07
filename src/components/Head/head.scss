@@ -1,0 +1,28 @@
+.head{
+    position: relative;
+    &__img{
+        max-width: 1440px;
+        height: 260px;
+        background: url('../../img/head_bg.png') center (center/cover) no-repeat;
+        margin: 0 auto;
+        padding-top: 130px;
+        
+    }
+    &__subtitle{
+        font-weight: 700;
+        font-size: 40px;
+        line-height: 58px;
+        color: #fff;
+        text-align: center;
+
+
+    }
+}
+
+@media(max-width: 576px){
+    .head{
+        &__subtitle{
+            font-size: 30px;
+        }
+    }
+}
