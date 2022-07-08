@@ -76,6 +76,9 @@ const stateSlice = createSlice({
                 (acum, elem) => acum + elem.count,
                 0
             );
+            window.localStorage.setItem('cardItem',
+                JSON.stringify(state.cardItems)
+            );
         },
         cardItemMinus(state, action) {
             const item = state.cardItems.find(
@@ -90,6 +93,9 @@ const stateSlice = createSlice({
             state.cardTotalItem = state.cardItems.reduce(
                 (acum, elem) => acum + elem.count,
                 0
+            );
+            window.localStorage.setItem('cardItem',
+                JSON.stringify(state.cardItems)
             );
         },
         setItemNum(state, action) {
@@ -109,6 +115,9 @@ const stateSlice = createSlice({
             state.cardTotalItem = state.cardItems.reduce(
                 (acum, elem) => acum + elem.count,
                 0
+            );
+            window.localStorage.setItem('cardItem',
+                JSON.stringify(state.cardItems)
             );
         },
         totalSum(state, action) {

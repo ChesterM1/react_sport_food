@@ -1,0 +1,45 @@
+.notFound{
+    text-align: center;
+    padding: 100px;
+    &__smile{
+        font-size: 65px;
+    }
+    &__title{
+        font-weight: 700;
+        font-size: 32px;
+        line-height: 39px;
+    }
+    &__descr{
+        font-weight: 500;
+        font-size: 22px;
+        line-height: 27px;
+    }
+    &__btn{
+        margin-top: 30px;
+        padding: 15px 25px;
+        background-color: #282828;
+        color: #fff;
+        font-size: 20px;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: 0.4s all;
+        &:hover{
+            transform: scale(1.1);
+        }
+    }
+}
+
+@media(max-width: 576px){
+    .notFound{
+        padding: 100px 0;
+        &__smile{
+            font-size: 40px;
+        }
+        &__title{
+            font-size: 25px;
+        }
+        &__descr{
+            font-size: 14px;
+        }
+    }
+}

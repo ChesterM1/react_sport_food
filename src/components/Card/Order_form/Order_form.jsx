@@ -6,12 +6,13 @@ import "./order_form.scss";
 import axios from "axios";
 import { useEffect, useState, useCallback, useRef } from "react";
 import {Link} from 'react-router-dom';
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import {cardDltAll} from '../../../store/slice/slice';
 
 const OrderForm = () => {
 
     const [cityValue, setSityValue] = useState(null);
-
+    const dispatch = useDispatch();
     const [cityField, setCityField] = useState([]);
     const [warhauseField, setWarhauseField] = useState(null);
     const cityRef = useRef("");
@@ -56,7 +57,6 @@ const OrderForm = () => {
          
 
     const onSubmit = (data) => {
-        console.log(data);
         const TOKEN = '5496292118:AAEOxx-eGOcLsj2xIS49zYLMObxK6N7fZFg'; 
         const CHAT_ID = '-1001737490828';
         const URL_API = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
@@ -86,6 +86,7 @@ const OrderForm = () => {
             .then(res => {
                 console.log('Успех');
                 reset();
+                dispatch(cardDltAll());
             })
             .catch(res => console.log('ошибка'))
     };
@@ -138,7 +139,6 @@ const OrderForm = () => {
                     },
                 })
                 .then((res) => {
-                    console.log(res.data.data[0].Description);
                     setWarhauseField(res.data.data[0].Description);
                 })
                 .catch(() => {
@@ -163,7 +163,6 @@ const OrderForm = () => {
                     },
                 })
                 .then((res) => {
-                    console.log(res.data.data[0].Addresses);
                     setCityField(res.data.data[0].Addresses);
                 })
                 .catch(() => {

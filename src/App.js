@@ -3,6 +3,7 @@ import Home from "./components/pages/Home";
 import Card from "./components/Card/Card";
 import ItemPage from "./components/pages/Item_page";
 import OrderForm from "./components/Card/Order_form/Order_form";
+import NotFoundPage from "./components/pages/NotFoundPage";
 import { useDispatch, useSelector } from "react-redux";
 import { getLocalStor } from "./store/slice/slice";
 import { useEffect } from "react";
@@ -30,6 +31,7 @@ function App() {
                     <Route path="card" element={<Card />} />
                     <Route path={"/item/:itemId"} element={<ItemPage />} />
                     <Route path="card/order" element={cardItems.length ? <OrderForm /> : <Card/>} />
+                    <Route path={"*"} element={<NotFoundPage />} />
                 </Routes>
             </BrowserRouter>
         </>

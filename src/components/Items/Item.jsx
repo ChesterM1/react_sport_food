@@ -7,6 +7,7 @@ import Counter from "../Counter/Counter";
 import Spinner from "../Spinner/Spinner";
 import { useDispatch, useSelector } from "react-redux/es/exports";
 import { addCardItems, totalSum, setCount } from "../../store/slice/slice";
+import NotFound from "../404/NotFound";
 
 const Item = () => {
 
@@ -15,13 +16,19 @@ const Item = () => {
     const dispatch = useDispatch();
     const  counter = useSelector(state => state.counterValue);
     const { itemId } = useParams();
+    const [errorLoad, setErrorLoad] = useState(false)
 
     const fetchItem = () => {
         const url = `https://62af6c70b0a980a2ef400e96.mockapi.io/items/${itemId}`;
-        axios.get(url).then((res) => {
-            setItem(res.data);
-            setLoad(false);
-        });
+        axios.get(url)
+            .then((res) => {
+                setItem(res.data);
+                setLoad(false);
+            })
+            .catch(res=> {
+                setLoad(false);
+                setErrorLoad(true);
+            } );
     };
     useEffect(() => {
         fetchItem();
@@ -30,6 +37,11 @@ const Item = () => {
     if (load) {
         return <Spinner />;
     }
+
+    if(errorLoad){
+        return <NotFound/>
+    }
+    
 
     
 
@@ -46,6 +58,8 @@ const Item = () => {
         dispatch(totalSum(parseInt(item.price)))
         dispatch(setCount(1));
     }
+
+    
 
     return (
         <section className="tabs">
