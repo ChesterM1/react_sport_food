@@ -104,6 +104,23 @@
     }
 }
 
+
+@media(max-width: 429px){
+    .order{
+        &__wrapper{
+            form{
+                .input-block{
+                    svg{
+                        &.warehouses{
+                            top: calc(50% + 12px);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+}
 @media(max-width: 390px){
     .order{
         &__wrapper{

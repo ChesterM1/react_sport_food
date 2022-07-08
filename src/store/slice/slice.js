@@ -48,6 +48,20 @@ const stateSlice = createSlice({
                 (acum, elem) => acum + elem.count,
                 0
             );
+            window.localStorage.setItem('cardItem',
+                JSON.stringify(state.cardItems)
+            );
+           
+        },
+        getLocalStor(state, action){
+            state.cardItems = action.payload;
+            state.cardTotalSum =
+                state.cardTotalSum + action.payload.reduce((acum, elem)=> acum + parseInt(elem.price),0);
+            
+            state.cardTotalItem = state.cardItems.reduce(
+                (acum, elem) => acum + elem.count,
+                0
+            );
         },
         cardItemPlus(state, action) {
             const item = state.cardItems.find(
@@ -103,10 +117,8 @@ const stateSlice = createSlice({
         cardDltAll(state) {
             state.cardItems = [];
             state.cardTotalSum = 0;
-            state.cardTotalItem = state.cardItems.reduce(
-                (acum, elem) => acum + elem.count,
-                0
-            );
+            state.cardTotalItem = 0;
+            window.localStorage.clear();
         },
         cardDltItem(state, action) {
             const item = state.cardItems.find(
@@ -120,6 +132,9 @@ const stateSlice = createSlice({
             state.cardTotalItem = state.cardItems.reduce(
                 (acum, elem) => acum + elem.count,
                 0
+            );
+            window.localStorage.setItem('cardItem',
+                JSON.stringify(state.cardItems)
             );
         },
         cardItems(state) {
@@ -145,5 +160,6 @@ export const {
     cardItemMinus,
     cardItemPlus,
     cardItems,
+    getLocalStor
 } = stateSlice.actions;
 export default stateSlice.reducer;
