@@ -1,0 +1,57 @@
+.thenks{
+    padding: 160px 40px;
+    margin: 0 auto;
+    height: 100vh;
+    text-align: center;
+    background: url('../../../../img/check.png') center/600px no-repeat;
+    position: relative;
+    h2{
+        font-size: 80px;
+        margin-bottom: 20px;
+    }
+    h3{
+        font-size: 35px;
+        font-weight: 900;
+        margin-bottom: 20px;
+    }
+    p{
+        font-size: 25px;
+        font-weight: 600;
+        margin-bottom: 20px;
+    }
+    button{
+        display: block;
+        margin: 30px auto;
+        font-size: 18px;
+        font-weight: 600;
+        padding: 20px 30px;
+        color: #fff;
+        background-color: rgba(0, 0, 0, 0.89);
+        border-radius: 30px;
+        cursor: pointer;
+        transition: 0.4s all;
+        z-index: 3;
+        &:hover{
+            opacity: 0.8;
+        }
+    }
+}
+
+@media(max-width: 670px){
+    .thenks{
+        background: url('../../../../img/check.png') center/400px no-repeat;
+        padding: 160px 10px;
+        h3{
+            font-size: 22px;
+        }
+        p{
+            font-size: 18px;
+        }
+    }
+}
+
+@media(max-width: 404px){
+    .thenks{
+        background: url('../../../../img/check.png') center/320px no-repeat;
+    }
+}

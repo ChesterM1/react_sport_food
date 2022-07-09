@@ -3,10 +3,11 @@ import './card_mini.scss';
 import cardImg from '../../img/card.png';
 import { useSelector } from 'react-redux/es/exports';
 
+
 const CardMini = ()=>{
 
     const {cardTotalSum, cardTotalItem} = useSelector(state => state)
-    
+
 
         return(
             <Link to='/card'>

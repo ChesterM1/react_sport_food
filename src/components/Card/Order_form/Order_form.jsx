@@ -7,7 +7,9 @@ import axios from "axios";
 import { useEffect, useState, useCallback, useRef } from "react";
 import {Link} from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
-import {cardDltAll} from '../../../store/slice/slice';
+import {cardDltAll, setCardThenksBlock, setCardErrorBlock} from '../../../store/slice/slice';
+import ThanksBlock from "./ThenksBlock/ThenksBlock";
+import NotFound from "../../404/NotFound";
 
 const OrderForm = () => {
 
@@ -16,8 +18,7 @@ const OrderForm = () => {
     const [cityField, setCityField] = useState([]);
     const [warhauseField, setWarhauseField] = useState(null);
     const cityRef = useRef("");
-    const cardItems = useSelector(state => state.cardItems);
-    
+    const {cardItems, cardThenksBlock, cardErrorBlock} = useSelector(state => state);
 
     const schema = yup.object({
         name: yup
@@ -35,7 +36,7 @@ const OrderForm = () => {
             .required("Обовьязково для заповнення")
             .min(9, "Мiнiмум 9 цифр")
             .max(16, "Максимум 16 цифр")
-            .matches(/\d/, "Тiльки цифри"),
+            .matches(/^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){9,14}(\s*)?$/, "Тiльки цифри"),
         city: yup.string().required("Обовьязково для заповнення"),
         warehouses: yup.string().required("Обовьязково для заповнення"),
     });
@@ -83,12 +84,16 @@ const OrderForm = () => {
                 parse_mode: 'html',
                 text: message,
             })
-            .then(res => {
+            .then(() => {
                 console.log('Успех');
                 reset();
                 dispatch(cardDltAll());
+                dispatch(setCardThenksBlock(true));
             })
-            .catch(res => console.log('ошибка'))
+            .catch(() => {
+                dispatch(setCardErrorBlock(true));
+                console.log('ошибка');
+            })
     };
 
     const watchInputCity = watch("city");
@@ -144,7 +149,7 @@ const OrderForm = () => {
                 .catch(() => {
                     setWarhauseField(null);
                 });
-        }, 700),
+        }, 400),
         []
     );
 
@@ -168,7 +173,7 @@ const OrderForm = () => {
                 .catch(() => {
                     setCityField([]);
                 });
-        }, 700),
+        }, 400) ,
         []
     );
 
@@ -176,6 +181,12 @@ const OrderForm = () => {
         getCity();
         getWarehouses();
     }, [watchInputCity, watchInputWarehouses]);
+
+    if(cardThenksBlock){
+        return <ThanksBlock/>
+    }else if(cardErrorBlock){
+        return <NotFound/>
+    }
 
     return (
         <section className="order">
@@ -271,17 +282,5 @@ const OrderForm = () => {
 
 export default OrderForm;
 
-//NP API KEY
-//0cf9b3451bce9b7168f3727dc9215f4d
-//1c1a05f2c6193418561c5722a2e6b62c
 
-//  }
-// {
-//     "apiKey": "1c1a05f2c6193418561c5722a2e6b62c",
-//     "modelName": "Address",
-//     "calledMethod": "getWarehouses",
-//     "methodProperties": {
-//         // "CityRef": "",
-//         "CityName": "Київ"
-//     }
-// }
+

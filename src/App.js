@@ -10,7 +10,7 @@ import { useEffect } from "react";
 
 function App() {
     const dispatch = useDispatch();
-    const cardItems = useSelector( state => state.cardItems);
+    const {cardItems, thenksBlock} = useSelector( state => state);
 
     const getStorageCard = () => {
         if (window.localStorage.getItem("cardItem")) {
@@ -30,7 +30,7 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="card" element={<Card />} />
                     <Route path={"/item/:itemId"} element={<ItemPage />} />
-                    <Route path="card/order" element={cardItems.length ? <OrderForm /> : <Card/>} />
+                    <Route path="card/order" element={cardItems.length || thenksBlock? <OrderForm /> : <Card/>} />
                     <Route path={"*"} element={<NotFoundPage />} />
                 </Routes>
             </BrowserRouter>

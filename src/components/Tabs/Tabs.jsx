@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useState, useRef, useEffect } from 'react';
 import Spinner from '../Spinner/Spinner';
 import { useSelector, useDispatch } from 'react-redux/es/exports';
-import { setTabsItems, getLocalStor } from '../../store/slice/slice';
+import { setTabsItems} from '../../store/slice/slice';
 
     
 
@@ -47,19 +47,11 @@ const Tabs = ()=>{
             });
     }
 
-    // const getStorageCard = ()=>{
-        
-    //     if( window.localStorage.getItem('cardItem')){
-    //         const jsonStr = window.localStorage.getItem('cardItem');
-    //         dispatch(getLocalStor(
-    //             JSON.parse(jsonStr)
-    //         ));
-    //     }
-    // }
+
     
     useEffect(()=>{
         fetchItems();
-        // getStorageCard();
+        
     },[activeNav]);
 
     const renders = tabsItems.map(item => (<TabsItem value={item} key={item.id}/>));

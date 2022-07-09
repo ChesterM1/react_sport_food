@@ -6,6 +6,8 @@ const initialState = {
     cardItems: [],
     cardTotalSum: 0,
     cardTotalItem: 0,
+    cardThenksBlock: false,
+    cardErrorBlock: false,
 };
 
 const stateSlice = createSlice({
@@ -56,7 +58,7 @@ const stateSlice = createSlice({
         getLocalStor(state, action){
             state.cardItems = action.payload;
             state.cardTotalSum =
-                state.cardTotalSum + action.payload.reduce((acum, elem)=> acum + parseInt(elem.price),0);
+                action.payload.reduce((acum, elem)=> acum + (parseInt(elem.price) * elem.count) ,0);
             
             state.cardTotalItem = state.cardItems.reduce(
                 (acum, elem) => acum + elem.count,
@@ -152,6 +154,12 @@ const stateSlice = createSlice({
                 0
             );
         },
+        setCardThenksBlock(state, action){
+            state.cardThenksBlock = action.payload;
+        },
+        setCardErrorBlock(state,action){
+            state.cardErrorBlock = action.payload;
+        }
     },
 });
 
@@ -169,6 +177,8 @@ export const {
     cardItemMinus,
     cardItemPlus,
     cardItems,
-    getLocalStor
+    getLocalStor,
+    setCardThenksBlock,
+    setCardErrorBlock
 } = stateSlice.actions;
 export default stateSlice.reducer;

@@ -23,10 +23,11 @@ const TabsItem = ({ value }) => {
         dispatch(addCardItems(cardItem));
         dispatch(totalSum(parseInt(price)));
     };
+    // animate__fadeIn
     return (
         <Link
             to={`/item/${id}`}
-            className="tabs-wrapper__link animate__animated animate__fadeInUp"
+            className="tabs-wrapper__link animate__animated animate__fadeInUp " 
         >
             <div className="tabs-wrapper__item">
                 <img
