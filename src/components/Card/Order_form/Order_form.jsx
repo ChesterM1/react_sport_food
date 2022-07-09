@@ -7,8 +7,8 @@ import axios from "axios";
 import { useEffect, useState, useCallback, useRef } from "react";
 import {Link} from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
-import {cardDltAll, setCardThenksBlock, setCardErrorBlock} from '../../../store/slice/slice';
-import ThanksBlock from "./ThenksBlock/ThenksBlock";
+import {cardDltAll, setCardThanksBlock, setCardErrorBlock} from '../../../store/slice/slice';
+import ThanksBlock from "./ThanksBlock/ThanksBlock";
 import NotFound from "../../404/NotFound";
 
 const OrderForm = () => {
@@ -88,7 +88,7 @@ const OrderForm = () => {
                 console.log('Успех');
                 reset();
                 dispatch(cardDltAll());
-                dispatch(setCardThenksBlock(true));
+                dispatch(setCardThanksBlock(true));
             })
             .catch(() => {
                 dispatch(setCardErrorBlock(true));

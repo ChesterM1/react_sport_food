@@ -6,7 +6,7 @@ const initialState = {
     cardItems: [],
     cardTotalSum: 0,
     cardTotalItem: 0,
-    cardThenksBlock: false,
+    cardThanksBlock: false,
     cardErrorBlock: false,
 };
 
@@ -154,7 +154,7 @@ const stateSlice = createSlice({
                 0
             );
         },
-        setCardThenksBlock(state, action){
+        setCardThanksBlock(state, action){
             state.cardThenksBlock = action.payload;
         },
         setCardErrorBlock(state,action){
@@ -178,7 +178,7 @@ export const {
     cardItemPlus,
     cardItems,
     getLocalStor,
-    setCardThenksBlock,
+    setCardThanksBlock,
     setCardErrorBlock
 } = stateSlice.actions;
 export default stateSlice.reducer;
