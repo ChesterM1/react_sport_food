@@ -149,7 +149,7 @@ const OrderForm = () => {
                 .catch(() => {
                     setWarhauseField(null);
                 });
-        }, 400),
+        }, 300),
         []
     );
 
@@ -173,7 +173,7 @@ const OrderForm = () => {
                 .catch(() => {
                     setCityField([]);
                 });
-        }, 400) ,
+        }, 300) ,
         []
     );
 
