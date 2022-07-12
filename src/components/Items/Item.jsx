@@ -8,6 +8,8 @@ import Spinner from "../Spinner/Spinner";
 import { useDispatch, useSelector } from "react-redux/es/exports";
 import { addCardItems, totalSum, setCount } from "../../store/slice/slice";
 import NotFound from "../404/NotFound";
+import { motion } from "framer-motion";
+
 
 const Item = () => {
 
@@ -60,11 +62,22 @@ const Item = () => {
     }
 
     
-
+// animate__animated animate__fadeInUp
     return (
         <section className="tabs">
             <div className="container">
-                <div className="items animate__animated animate__fadeInUp">
+                
+                <motion.div
+                    className="items"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1,
+                    transition:{
+                        duration: 1
+                    } }}
+                    exit={{ opacity: 0,
+                        transition:{
+                            duration: 1
+                        } }}>
                     <div className="items__header">
                         <div className="items__header-img">
                             <img src={img} alt="#" />
@@ -149,7 +162,8 @@ const Item = () => {
                             })}
                         </ul>
                     </div>
-                </div>
+                </motion.div>
+                
             </div>
         </section>
     );

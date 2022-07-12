@@ -2,9 +2,10 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux/es/exports";
 import "./tabs_item.scss";
 import { addCardItems, totalSum } from "../../store/slice/slice";
+import {motion} from 'framer-motion';
 
 const TabsItem = ({ value }) => {
-    const { title, weight, img, amount } = value.item;
+    const { title, weight, img, porcion } = value.item;
     const { id, price } = value;
     const dispatch = useDispatch();
 
@@ -12,7 +13,7 @@ const TabsItem = ({ value }) => {
         title,
         weight,
         img,
-        amount,
+        porcion,
         id,
         price,
         count: 1,
@@ -23,13 +24,24 @@ const TabsItem = ({ value }) => {
         dispatch(addCardItems(cardItem));
         dispatch(totalSum(parseInt(price)));
     };
-    // animate__fadeIn
+    // animate__fadeIn  animate__animated animate__fadeInUp 
     return (
         <Link
             to={`/item/${id}`}
-            className="tabs-wrapper__link animate__animated animate__fadeInUp " 
+            className="tabs-wrapper__link" 
         >
-            <div className="tabs-wrapper__item">
+            <motion.div
+                initial={{
+                    opacity: 0,
+
+                }}
+                animate={{
+                    opacity: 1,
+                    transition:{
+                        duration: 0.4,   
+                    }
+                }}
+             className="tabs-wrapper__item">
                 <img
                     src={img}
                     alt="vitamin icon"
@@ -42,7 +54,7 @@ const TabsItem = ({ value }) => {
                     </div>
                 ) : (
                     <div className="tabs-wrapper__weigth">
-                        Кількість в упаковці : <span>{amount}</span>
+                        Кількість в упаковці : <span>{porcion}</span>
                     </div>
                 )}
 
@@ -55,7 +67,7 @@ const TabsItem = ({ value }) => {
                     </button>
                     <div className="tabs-wrapper__price">{price}</div>
                 </div>
-            </div>
+            </motion.div>
         </Link>
     );
 };

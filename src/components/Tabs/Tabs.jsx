@@ -1,10 +1,12 @@
 import './tabs.scss';
 import TabsItem from '../Tabs_Item/Tabs_Item';
 import axios from 'axios';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Spinner from '../Spinner/Spinner';
 import { useSelector, useDispatch } from 'react-redux/es/exports';
 import { setTabsItems} from '../../store/slice/slice';
+import {AnimatePresence} from "framer-motion";
+
 
     
 
@@ -27,7 +29,6 @@ const Tabs = ()=>{
     const [activeNav, setActiveNav] = useState(filtersItems[0]);
     
 
-    const navRef = useRef(null)
 
     const onClickNav = (item, i)=>{
         setActiveNav(item);
@@ -57,6 +58,8 @@ const Tabs = ()=>{
     const renders = tabsItems.map(item => (<TabsItem value={item} key={item.id}/>));
 
     return(
+        <AnimatePresence initial={false}>
+
         <section className="tabs">
         <div className="container">
             <div className="tabs-nav">
@@ -64,18 +67,23 @@ const Tabs = ()=>{
                 <div className='tabs-nav__active'
                     onClick={onTriggerNav}
                 >{activeNav}</div>
-                <ul className={triggerNav ? 'active' : ''}
-                    ref={navRef}>
-                    {filtersItems.map((item, i)=>{
+                 <ul 
+                 className={triggerNav ? 'active' : ''}
+                    >
+                    { filtersItems.map((item, i)=>{
                         return(
                             <li 
-                            className={item === activeNav ? 'active ' : ''}
+                            className={item === activeNav ? 'active ' : ''} 
                              key={i}
-                             onClick={()=>onClickNav(item)}
-                             >{item}</li>
+                             onClick={()=>onClickNav(item)}>
+                                {item}
+                               
+                             </li>
                         )
                     })}
+                    
                 </ul>
+                
             </div>
 
             <div className="tabs-wrapper active ">
@@ -84,7 +92,10 @@ const Tabs = ()=>{
             </div>
         </div>
     </section>
+    </AnimatePresence>
     )
 }
+
+
 
 export default Tabs;

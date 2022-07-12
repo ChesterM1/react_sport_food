@@ -2,9 +2,11 @@ import {Link} from 'react-router-dom';
 import './complete_card.scss';
 import cardImg from '../../../img/card.png';
 import clean from '../../../img/clean_card.svg';
-import CardItem from '../Card_item/Card_item';
+import {MCardItem} from '../Card_item/Card_item';
 import { useSelector, useDispatch } from 'react-redux/es/exports';
 import { cardDltAll} from '../../../store/slice/slice';
+import { AnimatePresence } from "framer-motion";
+
 
 const CompleteCard = ()=>{
 
@@ -30,10 +32,13 @@ const CompleteCard = ()=>{
                     </div>
                 </div>
 
-
-                {cardItems.map(elem => {
-                    return <CardItem {...elem} key={elem.id} />
-                })}
+                <AnimatePresence >
+                    {cardItems.map(elem => {
+                        return <MCardItem {...elem} key={elem.id}
+                        exit={{ scale: 0 , opacity: 0, transition:{duration:0.6}}}/>
+                    })}
+                </AnimatePresence>
+                
 
                 <div className="card-total">
                     <div className="card-total__items">Кількість товарів : <span>{cardTotalItem}</span></div>
@@ -51,5 +56,7 @@ const CompleteCard = ()=>{
         </>
     )
 }
+
+
 
 export default CompleteCard;

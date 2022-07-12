@@ -155,7 +155,7 @@ const stateSlice = createSlice({
             );
         },
         setCardThanksBlock(state, action){
-            state.cardThenksBlock = action.payload;
+            state.cardThanksBlock = action.payload;
         },
         setCardErrorBlock(state,action){
             state.cardErrorBlock = action.payload;

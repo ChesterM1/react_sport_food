@@ -2,11 +2,13 @@ import "./card_item.scss";
 import CardCounter from "../Card_counter/Card_counter";
 import { useDispatch } from "react-redux/es/exports";
 import { cardDltItem } from "../../../store/slice/slice";
+import {forwardRef} from 'react';
+import {motion} from 'framer-motion';
 
-const CardItem = (prop) => {
+const CardItem = forwardRef((prop, ref)  => {
     const dispatch = useDispatch();
 
-    const { img, title, price, weight, id, amount, count } = prop;
+    const { img, title, price, weight, id, porcion, count } = prop;
     
     const itemDelete = ()=>{
         if(window.confirm('Ви насправдi хочете видалити цей товар?')){
@@ -15,7 +17,7 @@ const CardItem = (prop) => {
     }
 
     return (
-        <div className="card-block">
+        <div className="card-block" ref={ref}>
             <img src={img} alt="images" />
             <div className="card-block__title">
                 <div>{title}</div>
@@ -26,7 +28,7 @@ const CardItem = (prop) => {
                 </span>
             ) : (
                 <span className="card-block__weight">
-                    Кількість в упаковці : <span>{amount}</span>
+                    Кількість в упаковці : <span>{porcion}</span>
                 </span>
             )}
 
@@ -46,5 +48,5 @@ const CardItem = (prop) => {
             </div>
         </div>
     );
-};
-export default CardItem;
+});
+export  const MCardItem = motion(CardItem);

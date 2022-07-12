@@ -4,7 +4,7 @@ import EmptyCard from './Empty_card/Empty-card';
 import { useSelector, useDispatch } from 'react-redux/es/exports';
 import { useEffect } from 'react';
 import { setCardThanksBlock, setCardErrorBlock } from '../../store/slice/slice';
-
+import { motion} from "framer-motion";
 const Card = ()=>{
 
     const cardItems = useSelector( state=> state.cardItems);
@@ -19,13 +19,25 @@ const Card = ()=>{
         :<EmptyCard/> ;
 
     return(
-        <div className="card">
+        <motion.div
+            initial={{
+                opacity: 0
+            }}
+            animate={{
+                opacity: 1,
+                transition:{
+                    duration: 0.4
+                }
+            }}
+         className="card">
             <div className="container">
                
                {render}
+               
+                
 
             </div>
-        </div>
+        </motion.div>
         
         
     )

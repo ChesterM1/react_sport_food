@@ -11,6 +11,7 @@
     "axios": "^0.27.2",
     "debounce": "^1.2.1",
     "formik": "^2.2.9",
+    "framer-motion": "^6.4.3",
     "just-validate": "^3.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

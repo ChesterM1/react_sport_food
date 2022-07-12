@@ -18,7 +18,7 @@ const OrderForm = () => {
     const [cityField, setCityField] = useState([]);
     const [warhauseField, setWarhauseField] = useState(null);
     const cityRef = useRef("");
-    const {cardItems, cardThenksBlock, cardErrorBlock} = useSelector(state => state);
+    const {cardItems, cardThanksBlock, cardErrorBlock} = useSelector(state => state);
 
     const schema = yup.object({
         name: yup
@@ -182,7 +182,7 @@ const OrderForm = () => {
         getWarehouses();
     }, [watchInputCity, watchInputWarehouses]);
 
-    if(cardThenksBlock){
+    if(cardThanksBlock){
         return <ThanksBlock/>
     }else if(cardErrorBlock){
         return <NotFound/>
