@@ -17,7 +17,6 @@ import NotFound from "../../404/NotFound";
 import { motion, AnimatePresence } from "framer-motion";
 
 const OrderForm = () => {
-    
     const dispatch = useDispatch();
     const { cardItems, cardThanksBlock, cardErrorBlock } = useSelector(
         (state) => state
@@ -26,7 +25,6 @@ const OrderForm = () => {
     const [cityField, setCityField] = useState(false);
     const [warhauseField, setWarhauseField] = useState(null);
     const cityRef = useRef("");
-    
 
     const schema = yup.object({
         name: yup
@@ -141,16 +139,16 @@ const OrderForm = () => {
         setWarhauseField(null);
     };
 
-    const resetWarhauserValue = ()=>{
+    const resetWarhauserValue = () => {
         setValue("warehouses", "");
         setWarhauseField(null);
-    }
+    };
 
-    const resetCityValue = ()=>{
+    const resetCityValue = () => {
         setValue("city", "");
         setCityField(false);
         resetWarhauserValue();
-    }
+    };
 
     const fetchWarehouses = useCallback(
         debounce((string) => {
@@ -177,8 +175,8 @@ const OrderForm = () => {
 
     const fetchCity = useCallback(
         debounce((string) => {
-            if(!string){
-                return
+            if (!string) {
+                return;
             }
 
             axios
@@ -305,30 +303,45 @@ const OrderForm = () => {
                                 </svg>
                             )}
                             <AnimatePresence>
-                            {cityField && (
-                                
-                                <motion.div className="drop-down city"
-                                initial={{ height: 0, opacity:0}}
-                                animate={{ height: 'auto',  opacity:1, transition:{type: 'keyframes', duration: 0.5}}}
-                                exit={{height: 0, opacity:0, transition:{type: 'keyframes', duration: 0.7}}}
-                                >
-                                    <ul>
-                                        {cityField.map((item, i) => {
-                                            return (
-                                                <li
-                                                
-                                                    key={i}
-                                                    onClick={() =>
-                                                        targetCity(item)
-                                                    }
-                                                >
-                                                    <span>{item.Present}</span>
-                                                </li>
-                                            );
-                                        })}
-                                    </ul>
-                                </motion.div>
-                            )}
+                                {cityField && watch()?.city && (
+                                    <motion.div
+                                        className="drop-down city"
+                                        initial={{ height: 0, opacity: 0 }}
+                                        animate={{
+                                            height: "auto",
+                                            opacity: 1,
+                                            transition: {
+                                                type: "keyframes",
+                                                duration: 0.5,
+                                            },
+                                        }}
+                                        exit={{
+                                            height: 0,
+                                            opacity: 0,
+                                            transition: {
+                                                type: "keyframes",
+                                                duration: 0.7,
+                                            },
+                                        }}
+                                    >
+                                        <ul>
+                                            {cityField.map((item, i) => {
+                                                return (
+                                                    <li
+                                                        key={i}
+                                                        onClick={() =>
+                                                            targetCity(item)
+                                                        }
+                                                    >
+                                                        <span>
+                                                            {item.Present}
+                                                        </span>
+                                                    </li>
+                                                );
+                                            })}
+                                        </ul>
+                                    </motion.div>
+                                )}
                             </AnimatePresence>
                             {errors?.city && (
                                 <div className="error">
@@ -369,14 +382,21 @@ const OrderForm = () => {
                                 </svg>
                             )}
                             <AnimatePresence>
-                                {warhauseField && (
-                                    <div
-                                        className="drop-down warehouses"
-                                    >
+                                {warhauseField && watch()?.warehouses && (
+                                    <div className="drop-down warehouses">
                                         <motion.ul
-                                            initial={{ height: 0, opacity:0}}
-                                            animate={{ height: 'auto',  opacity:1}}
-                                            exit={{height: 0, opacity:0, transition:{type: 'keyframes'}}}
+                                            initial={{ height: 0, opacity: 0 }}
+                                            animate={{
+                                                height: "auto",
+                                                opacity: 1,
+                                            }}
+                                            exit={{
+                                                height: 0,
+                                                opacity: 0,
+                                                transition: {
+                                                    type: "keyframes",
+                                                },
+                                            }}
                                         >
                                             <li
                                                 onClick={() =>
