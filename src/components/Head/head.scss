@@ -1,14 +1,16 @@
-.head{
+.head {
     position: relative;
-    &__img{
+
+    &__img {
         max-width: 1440px;
         height: 260px;
-        background: url('../../img/head_bg.png') center (center/cover) no-repeat;
+        background: url('../../img/head_bg-min.png') center (center/cover) no-repeat;
         margin: 0 auto;
         padding-top: 130px;
-        
+
     }
-    &__subtitle{
+
+    &__subtitle {
         font-weight: 700;
         font-size: 40px;
         line-height: 58px;
@@ -19,9 +21,9 @@
     }
 }
 
-@media(max-width: 576px){
-    .head{
-        &__subtitle{
+@media(max-width: 576px) {
+    .head {
+        &__subtitle {
             font-size: 30px;
         }
     }

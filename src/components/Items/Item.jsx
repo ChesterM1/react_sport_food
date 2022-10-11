@@ -10,27 +10,26 @@ import { addCardItems, totalSum, setCount } from "../../store/slice/slice";
 import NotFound from "../404/NotFound";
 import { motion } from "framer-motion";
 
-
 const Item = () => {
-
     const [item, setItem] = useState([]);
     const [load, setLoad] = useState(true);
     const dispatch = useDispatch();
-    const  counter = useSelector(state => state.counterValue);
+    const counter = useSelector((state) => state.counterValue);
     const { itemId } = useParams();
-    const [errorLoad, setErrorLoad] = useState(false)
+    const [errorLoad, setErrorLoad] = useState(false);
 
     const fetchItem = () => {
         const url = `https://62af6c70b0a980a2ef400e96.mockapi.io/items/${itemId}`;
-        axios.get(url)
+        axios
+            .get(url)
             .then((res) => {
                 setItem(res.data);
                 setLoad(false);
             })
-            .catch(res=> {
+            .catch(() => {
                 setLoad(false);
                 setErrorLoad(true);
-            } );
+            });
     };
     useEffect(() => {
         fetchItem();
@@ -40,44 +39,46 @@ const Item = () => {
         return <Spinner />;
     }
 
-    if(errorLoad){
-        return <NotFound/>
+    if (errorLoad) {
+        return <NotFound />;
     }
-    
-
-    
 
     const { brand, img, porcion, descr, tableValue, title, weight } = item.item;
-    const addCard = ()=>{
-        dispatch(addCardItems({
-            id : item.id,
-            img,
-            title,
-            weight,
-            price : item.price,
-            count: counter
-        }));
-        dispatch(totalSum(parseInt(item.price)))
+    const addCard = () => {
+        dispatch(
+            addCardItems({
+                id: item.id,
+                img,
+                title,
+                weight,
+                price: item.price,
+                count: counter,
+            })
+        );
+        dispatch(totalSum(parseInt(item.price)));
         dispatch(setCount(1));
-    }
+    };
 
-    
-// animate__animated animate__fadeInUp
+    // animate__animated animate__fadeInUp
     return (
         <section className="tabs">
             <div className="container">
-                
                 <motion.div
                     className="items"
                     initial={{ opacity: 0 }}
-                    animate={{ opacity: 1,
-                    transition:{
-                        duration: 1
-                    } }}
-                    exit={{ opacity: 0,
-                        transition:{
-                            duration: 1
-                        } }}>
+                    animate={{
+                        opacity: 1,
+                        transition: {
+                            duration: 1,
+                        },
+                    }}
+                    exit={{
+                        opacity: 0,
+                        transition: {
+                            duration: 1,
+                        },
+                    }}
+                >
                     <div className="items__header">
                         <div className="items__header-img">
                             <img src={img} alt="#" />
@@ -104,10 +105,12 @@ const Item = () => {
                                 Ціна : <span>{item.price}</span>
                             </div>
 
-                            <Counter/>
+                            <Counter />
 
-                            <button className="items__header-buying__btn"
-                            onClick={addCard}>
+                            <button
+                                className="items__header-buying__btn"
+                                onClick={addCard}
+                            >
                                 Замовити зараз
                             </button>
                         </div>
@@ -163,7 +166,6 @@ const Item = () => {
                         </ul>
                     </div>
                 </motion.div>
-                
             </div>
         </section>
     );
